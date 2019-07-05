@@ -16,6 +16,12 @@ export default class OurCoffee extends Component {
   coffeService = new coffeService();
 
   state = { selectedItem: "", error: false };
+
+  onItemSelected = id => {
+    console.log(id);
+    this.setState({ selectedItem: id });
+  };
+
   render() {
     if (this.state.error) {
       return <Error />;
@@ -23,7 +29,7 @@ export default class OurCoffee extends Component {
 
     const itemList = (
       <ItemList
-        // onItemSelected={this.onItemSelected}
+        onItemSelected={this.onItemSelected}
         // id={this.state.selectedItem}
         getTypeItems={"getCoffeItems"}
       />

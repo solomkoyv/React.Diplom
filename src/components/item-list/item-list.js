@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Spinner from "../../components/spinner";
+import { Link } from "react-router-dom";
+
 import coffeService from "../services";
 
 import Error from "../error";
@@ -37,7 +39,7 @@ export default class c extends Component {
           <div
             className="best__item"
             key={id}
-            onClick={() => this.props.onItemSelected(id)}
+            onClick={() => this.props.onItemSelected(item)}
           >
             <img src={url} alt={name} />
             <div className="best__item-title">{name}</div>
@@ -49,16 +51,18 @@ export default class c extends Component {
       return arr.map(item => {
         const { id, url, name, price, country } = item;
         return (
-          <div
-            className="shop__item"
-            key={id}
-            // onClick={() => this.props.onItemSelected(id)}
-          >
-            <img src={url} alt={name} />
-            <div className="shop__item-title">{name}</div>
-            <div className="shop__item-country">{country}</div>
-            <div className="shop__item-price">{price}$</div>
-          </div>
+          <Link to="/item-page" key={id}>
+            <div
+              className="shop__item"
+              // key={id}
+              onClick={() => this.props.onItemSelected(item)}
+            >
+              <img src={url} alt={name} />
+              <div className="shop__item-title">{name}</div>
+              <div className="shop__item-country">{country}</div>
+              <div className="shop__item-price">{price}$</div>
+            </div>
+          </Link>
         );
       });
     }

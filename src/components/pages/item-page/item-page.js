@@ -4,9 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../sass/mainpage.sass";
 
 import Header from "../../header";
+import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 
 export default class ItemPage extends Component {
   render() {
+    const item = this.props;
+    console.log(item);
     return (
       <>
         <div className="banner">
@@ -29,7 +32,7 @@ export default class ItemPage extends Component {
                 <div className="title">About it</div>
                 <img
                   className="beanslogo"
-                  src="logo/Beans_logo_dark.svg"
+                  src={Beans_logo_dark}
                   alt="Beans logo"
                 />
                 <div className="shop__point">
