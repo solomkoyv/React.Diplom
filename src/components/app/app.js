@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "../header";
-import HeaderInfo from "../header-info";
 import MainPage from "../pages/main-page";
+import OurCoffee from "../pages/our-coffee";
+import ForYourPleasure from "../pages/for-your-pleasure";
 import Footer from "../footer";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class App extends Component {
   render() {
     return (
-      <div className="app">
-        <div className="preview">
-          <Container>
-            <Header />
-            <HeaderInfo />
-          </Container>
+      <Router>
+        <div className="app">
+          <Route path="/" exact component={MainPage} />
+          <Route path="/our-coffee" component={OurCoffee} />
+          <Route path="/for-your-pleasure" component={ForYourPleasure} />
+          <Footer />
         </div>
-        <MainPage />
-        <Footer />
-      </div>
+      </Router>
     );
   }
 }

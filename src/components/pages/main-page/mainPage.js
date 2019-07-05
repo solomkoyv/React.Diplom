@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../sass/mainpage.sass";
+
+import Header from "../../header";
+import HeaderInfo from "../../header-info";
 import About from "../../about";
-// import RowBlock from "../../rowBlock";
+
 import ItemList from "../../item-list/";
 import coffeService from "../../services";
 import Error from "../../error";
-
-// import CoffeService from "../../services/coffe-service";
 
 export default class MainPage extends Component {
   coffeService = new coffeService();
@@ -29,22 +30,26 @@ export default class MainPage extends Component {
       return <Error />;
     }
 
-    // console.log(this.coffeService.getBestsellersItems());
-
     const itemList = (
       <ItemList
-        // onItemSelected={this.onItemSelected}
+        onItemSelected={this.onItemSelected}
         // id={this.state.selectedItem}
-        getData={this.coffeService.getBestsellersItems()}
+        getTypeItems={"getBestsellersItems"}
       />
     );
 
     return (
       <>
+        <div className="preview">
+          <Container>
+            <Header />
+            <HeaderInfo />
+          </Container>
+        </div>
         <About />
         <section className="best">
           <Container>
-            <div className="title">Our best</div>
+            <div className="title">Our best!</div>
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>{itemList}</Col>
             </Row>

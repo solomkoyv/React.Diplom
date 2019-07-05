@@ -2,6 +2,8 @@ import React from "react";
 import { Col, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../sass/header.sass";
+import { Link } from "react-router-dom";
+
 import Logo from "../../logo/Logo.svg";
 // import { Switch, Route } from "react-router-dom";
 // import { Link } from "react-router-dom";
@@ -14,15 +16,15 @@ const Header = () => {
           <header>
             <ul className="header">
               <li className="header__item">
-                <a href="/">
+                <Link to="/">
                   <img src={Logo} alt="logo" />
-                </a>
+                </Link>
               </li>
               <li className="header__item">
-                <a href="/">Our coffee</a>
+                <Link to="/our-coffee/">Our coffee</Link>
               </li>
               <li className="header__item">
-                <a href="/">For your pleasure</a>
+                <Link to="/for-your-pleasure/">For your pleasure</Link>
               </li>
             </ul>
           </header>
