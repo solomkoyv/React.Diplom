@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "../../header";
 import SearchPanel from "../../search-panel";
+import ItemsFilter from "../../item-filter";
 
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 import CoffeeGirl from "../../../img/coffee_girl.jpg";
@@ -75,7 +76,19 @@ export default class OurCoffee extends Component {
               </Col>
             </Row>
             <div className="line" />
-            <SearchPanel />
+            <Row>
+              <Col lg={{ size: 4, offset: 2 }}>
+                <SearchPanel />
+              </Col>
+              <Col lg="4">
+                <div className="shop__filter">
+                  <div className="shop__filter-label">Or filter</div>
+                  <div className="shop__filter-group">
+                    <ItemsFilter />
+                  </div>
+                </div>
+              </Col>
+            </Row>
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>
                 <div className="shop__wrapper">{itemList}</div>
