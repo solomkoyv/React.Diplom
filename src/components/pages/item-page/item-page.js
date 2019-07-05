@@ -3,13 +3,16 @@ import { Col, Row, Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../sass/mainpage.sass";
 
+// import OurCoffee from "../../pages/our-coffee";
+
 import Header from "../../header";
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 
 export default class ItemPage extends Component {
   render() {
-    const item = this.props;
-    console.log(item);
+    // const item = this.itemList;
+    // const { item } = this.props;
+    // console.log(item);
     return (
       <>
         <div className="banner">
@@ -19,7 +22,7 @@ export default class ItemPage extends Component {
         </div>
         <section className="shop">
           <Container>
-            {/* <div className="title">Our best!</div> */}
+            <div className="title">Our best!</div>
             <Row>
               <Col lg={{ size: 5, offset: 1 }}>
                 <img

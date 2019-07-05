@@ -6,7 +6,7 @@ import coffeService from "../services";
 
 import Error from "../error";
 
-export default class c extends Component {
+export default class ItemList extends Component {
   coffeService = new coffeService();
 
   state = { itemList: null, error: false };
@@ -20,9 +20,16 @@ export default class c extends Component {
           this.setState({ itemList });
         })
         .catch(() => this.setState({ error: true }));
-    } else {
+    } else if (getTypeItems === "getCoffeItems") {
       this.coffeService
         .getCoffeItems()
+        .then(itemList => {
+          this.setState({ itemList });
+        })
+        .catch(() => this.setState({ error: true }));
+    } else {
+      this.coffeService
+        .getGoodsItems()
         .then(itemList => {
           this.setState({ itemList });
         })
