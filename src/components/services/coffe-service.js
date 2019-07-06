@@ -25,6 +25,11 @@ export default class CoffeService {
     return res.map(this._transformItem);
   };
 
+  getFilterCoffeItems = async country => {
+    const res = await this.getResource(`/coffee?country=${country}`);
+    return res.map(this._transformItem);
+  };
+
   _transformItem = data => {
     data["id"] = idGenerator();
     return { ...data };

@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../header";
 import SearchPanel from "../../search-panel";
 import ItemsFilter from "../../item-filter";
+import ItemPage from "../../pages/item-page";
 
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 import CoffeeGirl from "../../../img/coffee_girl.jpg";
@@ -16,26 +17,69 @@ import Error from "../../error";
 export default class OurCoffee extends Component {
   coffeService = new coffeService();
 
-  state = { selectedItem: "", error: false };
+  state = { itemList: null, selectedItem: null, searchName: "", error: false };
 
-  onItemSelected = id => {
-    console.log(id);
-    this.setState({ selectedItem: id });
+  componentDidMount() {
+    this.getAllCoffeItems();
+  }
+
+  onItemSelected = selectedItem => {
+    this.setState({ selectedItem });
   };
+
+  onClearItemSelected = () => this.setState({ selectedItem: null });
+
+  onFilterTypeClick = country => {
+    this.coffeService
+      .getFilterCoffeItems(country)
+      .then(itemList => {
+        this.setState({ itemList });
+      })
+      .catch(() => this.setState({ error: true }));
+  };
+
+  getAllCoffeItems = () => {
+    this.coffeService
+      .getCoffeItems()
+      .then(itemList => {
+        this.setState({ itemList });
+      })
+      .catch(() => this.setState({ error: true }));
+  };
+
+  onSearchName = name => this.setState({ searchName: name });
 
   render() {
     if (this.state.error) {
       return <Error />;
     }
 
+    if (this.state.selectedItem) {
+      return (
+        <ItemPage
+          item={this.state.selectedItem}
+          onClearItemSelected={this.onClearItemSelected}
+        />
+      );
+    }
+
+    const listforRender = (() => {
+      if (this.state.searchName) {
+        return this.state.itemList.filter(item => {
+          return item.name
+            .toLowerCase()
+            .includes(this.state.searchName.toLowerCase());
+        });
+      }
+      return this.state.itemList;
+    })();
     const itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
-        // id={this.state.selectedItem}
-        getTypeItems={"getCoffeItems"}
+        itemList={listforRender}
+        error={this.state.error}
       />
     );
-
     return (
       <>
         <div className="banner">
@@ -78,13 +122,16 @@ export default class OurCoffee extends Component {
             <div className="line" />
             <Row>
               <Col lg={{ size: 4, offset: 2 }}>
-                <SearchPanel />
+                <SearchPanel onSearchName={this.onSearchName} />
               </Col>
-              <Col lg="4">
+              <Col lg="5">
                 <div className="shop__filter">
                   <div className="shop__filter-label">Or filter</div>
                   <div className="shop__filter-group">
-                    <ItemsFilter />
+                    <ItemsFilter
+                      onFilterTypeClick={this.onFilterTypeClick}
+                      getAllCoffeItems={this.getAllCoffeItems}
+                    />
                   </div>
                 </div>
               </Col>

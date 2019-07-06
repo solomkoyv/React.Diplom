@@ -3,7 +3,7 @@ import { Col, Row, Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "../../header";
-import SearchPanel from "../../search-panel";
+import ItemPage from "../../pages/item-page";
 
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 import CoffeeGirl from "../../../img/coffee_girl.jpg";
@@ -15,23 +15,42 @@ import Error from "../../error";
 export default class ForYourPleasure extends Component {
   coffeService = new coffeService();
 
-  state = { selectedItem: "", error: false };
+  state = { itemList: null, selectedItem: null, error: false };
 
-  onItemSelected = id => {
-    console.log(id);
-    this.setState({ selectedItem: id });
+  componentDidMount() {
+    this.coffeService
+      .getGoodsItems()
+      .then(itemList => {
+        this.setState({ itemList });
+      })
+      .catch(() => this.setState({ error: true }));
+  }
+
+  onItemSelected = selectedItem => {
+    this.setState({ selectedItem });
   };
+
+  onClearItemSelected = () => this.setState({ selectedItem: null });
 
   render() {
     if (this.state.error) {
       return <Error />;
     }
 
+    if (this.state.selectedItem) {
+      return (
+        <ItemPage
+          item={this.state.selectedItem}
+          onClearItemSelected={this.onClearItemSelected}
+        />
+      );
+    }
+
     const itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
-        // id={this.state.selectedItem}
-        getTypeItems={"getGoodsItems"}
+        itemList={this.state.itemList}
+        error={this.state.error}
       />
     );
 

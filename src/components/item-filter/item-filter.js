@@ -4,20 +4,22 @@ export default class ItemsFilter extends Component {
   buttons = [
     { name: "Brazil", label: "Brazil" },
     { name: "Kenya", label: "Kenya" },
-    { name: "Columbia", label: "Columbia" }
+    { name: "Columbia", label: "Columbia" },
+    { name: "clear", label: "Clear" }
   ];
 
   render() {
     const buttons = this.buttons.map(({ name, label }) => {
-      const { onFilterSelect } = this.props;
-      // const active = filter === name;
-      // const clazz = active ? "btn-info" : "btn-outline-secondary";
+      const clickHandler = label => () => {
+        if (label === "Clear") return this.props.getAllCoffeItems();
+        return this.props.onFilterTypeClick(label);
+      };
       return (
         <button
           key={name}
           type="button"
           className="shop__filter-btn"
-          onClick={() => onFilterSelect(name)}
+          onClick={clickHandler(label)}
         >
           {label}
         </button>

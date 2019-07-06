@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Spinner from "../../components/spinner";
-import { Link } from "react-router-dom";
 
 import coffeService from "../services";
 
@@ -9,37 +8,8 @@ import Error from "../error";
 export default class ItemList extends Component {
   coffeService = new coffeService();
 
-  state = { itemList: null, error: false };
-
-  componentDidMount() {
-    const { getTypeItems } = this.props;
-    if (getTypeItems === "getBestsellersItems") {
-      this.coffeService
-        .getBestsellersItems()
-        .then(itemList => {
-          this.setState({ itemList });
-        })
-        .catch(() => this.setState({ error: true }));
-    } else if (getTypeItems === "getCoffeItems") {
-      this.coffeService
-        .getCoffeItems()
-        .then(itemList => {
-          this.setState({ itemList });
-        })
-        .catch(() => this.setState({ error: true }));
-    } else {
-      this.coffeService
-        .getGoodsItems()
-        .then(itemList => {
-          this.setState({ itemList });
-        })
-        .catch(() => this.setState({ error: true }));
-    }
-  }
-
   renderItems(arr) {
-    const { getTypeItems } = this.props;
-    if (getTypeItems === "getBestsellersItems") {
+    if (this.props.isMainPage) {
       return arr.map(item => {
         const { id, url, name, price } = item;
         return (
@@ -58,27 +28,25 @@ export default class ItemList extends Component {
       return arr.map(item => {
         const { id, url, name, price, country } = item;
         return (
-          <Link to="/item-page" key={id}>
-            <div
-              className="shop__item"
-              // key={id}
-              onClick={() => this.props.onItemSelected(item)}
-            >
-              <img src={url} alt={name} />
-              <div className="shop__item-title">{name}</div>
-              <div className="shop__item-country">{country}</div>
-              <div className="shop__item-price">{price}$</div>
-            </div>
-          </Link>
+          <div
+            className="shop__item"
+            key={id}
+            onClick={() => this.props.onItemSelected(item)}
+          >
+            <img src={url} alt={name} />
+            <div className="shop__item-title">{name}</div>
+            <div className="shop__item-country">{country}</div>
+            <div className="shop__item-price">{price}$</div>
+          </div>
         );
       });
     }
   }
 
   render() {
-    const { itemList } = this.state;
+    const { itemList } = this.props;
 
-    if (this.state.error) {
+    if (this.props.error) {
       return <Error />;
     }
 

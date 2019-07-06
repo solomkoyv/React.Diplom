@@ -6,6 +6,7 @@ import "../../../sass/mainpage.sass";
 import Header from "../../header";
 import HeaderInfo from "../../header-info";
 import About from "../../about";
+import ItemPage from "../../pages/item-page";
 
 import ItemList from "../../item-list/";
 import coffeService from "../../services";
@@ -14,12 +15,22 @@ import Error from "../../error";
 export default class MainPage extends Component {
   coffeService = new coffeService();
 
-  state = { selectedItem: "", error: false };
+  state = { itemList: null, selectedItem: null, error: false };
 
-  onItemSelected = id => {
-    console.log(id);
-    this.setState({ selectedItem: id });
+  componentDidMount() {
+    this.coffeService
+      .getBestsellersItems()
+      .then(itemList => {
+        this.setState({ itemList });
+      })
+      .catch(() => this.setState({ error: true }));
+  }
+
+  onItemSelected = selectedItem => {
+    this.setState({ selectedItem });
   };
+
+  onClearItemSelected = () => this.setState({ selectedItem: null });
 
   componentDidCatch() {
     this.setState({ error: true });
@@ -30,11 +41,21 @@ export default class MainPage extends Component {
       return <Error />;
     }
 
+    if (this.state.selectedItem) {
+      return (
+        <ItemPage
+          item={this.state.selectedItem}
+          onClearItemSelected={this.onClearItemSelected}
+        />
+      );
+    }
+
     const itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
-        // id={this.state.selectedItem}
-        getTypeItems={"getBestsellersItems"}
+        itemList={this.state.itemList}
+        isMainPage
+        error={this.state.error}
       />
     );
 

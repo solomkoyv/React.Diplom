@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import Logo_black from "../../logo/Logo_black.svg";
 import Beans_logo_dark from "../../logo/Beans_logo_dark.svg";
 
-const Footer = () => {
+const Footer = ({ onClearItemSelected }) => {
+  const clearItemSelect = () => {
+    if (onClearItemSelected) {
+      onClearItemSelected();
+    }
+  };
   return (
     <>
       <footer>
@@ -17,14 +22,22 @@ const Footer = () => {
               <ul className="footer">
                 <li className="footer__item">
                   <Link to="/">
-                    <img src={Logo_black} alt="logo" />
+                    <img
+                      src={Logo_black}
+                      alt="logo"
+                      onClick={clearItemSelect}
+                    />
                   </Link>
                 </li>
                 <li className="footer__item">
-                  <Link to="/our-coffee/">Our coffee</Link>
+                  <Link to="/our-coffee/">
+                    <span onClick={clearItemSelect}>Our coffee</span>
+                  </Link>
                 </li>
                 <li className="footer__item">
-                  <Link to="/for-your-pleasure/">For your pleasure</Link>
+                  <Link to="/for-your-pleasure/">
+                    <span onClick={clearItemSelect}>For your pleasure</span>
+                  </Link>
                 </li>
               </ul>
             </Col>

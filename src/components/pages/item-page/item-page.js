@@ -3,21 +3,18 @@ import { Col, Row, Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../sass/mainpage.sass";
 
-// import OurCoffee from "../../pages/our-coffee";
-
 import Header from "../../header";
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 
 export default class ItemPage extends Component {
   render() {
-    // const item = this.itemList;
-    // const { item } = this.props;
-    // console.log(item);
+    const { price, country, description, url } = this.props.item;
+
     return (
       <>
         <div className="banner">
           <Container>
-            <Header />
+            <Header onClearItemSelected={this.props.onClearItemSelected} />
           </Container>
         </div>
         <section className="shop">
@@ -25,11 +22,7 @@ export default class ItemPage extends Component {
             <div className="title">Our best!</div>
             <Row>
               <Col lg={{ size: 5, offset: 1 }}>
-                <img
-                  className="shop__girl"
-                  src="img/coffee_item.jpg"
-                  alt="coffee_item"
-                />
+                <img className="shop__girl" src={url} alt="coffee_item" />
               </Col>
               <Col lg="4">
                 <div className="title">About it</div>
@@ -38,20 +31,21 @@ export default class ItemPage extends Component {
                   src={Beans_logo_dark}
                   alt="Beans logo"
                 />
-                <div className="shop__point">
-                  <span>Country:</span>
-                  Brazil
-                </div>
-                <div className="shop__point">
-                  <span>Description:</span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
+                {country && (
+                  <div className="shop__point">
+                    <span>Country:</span>
+                    {country}
+                  </div>
+                )}
+                {description && (
+                  <div className="shop__point">
+                    <span>Description:</span>
+                    {description}
+                  </div>
+                )}
                 <div className="shop__point">
                   <span>Price:</span>
-                  <span className="shop__point-price">16.99$</span>
+                  <span className="shop__point-price">{price}$</span>
                 </div>
               </Col>
             </Row>

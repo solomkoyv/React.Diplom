@@ -5,10 +5,13 @@ import "../../sass/header.sass";
 import { Link } from "react-router-dom";
 
 import Logo from "../../logo/Logo.svg";
-// import { Switch, Route } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ onClearItemSelected }) => {
+  const clearItemSelect = () => {
+    if (onClearItemSelected) {
+      onClearItemSelected();
+    }
+  };
   return (
     <>
       <Row>
@@ -17,14 +20,18 @@ const Header = () => {
             <ul className="header">
               <li className="header__item">
                 <Link to="/">
-                  <img src={Logo} alt="logo" />
+                  <img src={Logo} alt="logo" onClick={clearItemSelect} />
                 </Link>
               </li>
               <li className="header__item">
-                <Link to="/our-coffee/">Our coffee</Link>
+                <Link to="/our-coffee/">
+                  <span onClick={clearItemSelect}>Our coffee</span>
+                </Link>
               </li>
               <li className="header__item">
-                <Link to="/for-your-pleasure/">For your pleasure</Link>
+                <Link to="/for-your-pleasure/">
+                  <span onClick={clearItemSelect}>For your pleasure</span>
+                </Link>
               </li>
             </ul>
           </header>
