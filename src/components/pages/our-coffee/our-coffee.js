@@ -11,6 +11,7 @@ import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 import CoffeeGirl from "../../../img/coffee_girl.jpg";
 
 import ItemList from "../../item-list/";
+import Footer from "../../footer";
 import coffeService from "../../services";
 import Error from "../../error";
 
@@ -143,6 +144,7 @@ export default class OurCoffee extends Component {
             </Row>
           </Container>
         </section>
+        <Footer />
       </>
     );
   }

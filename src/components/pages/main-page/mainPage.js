@@ -9,6 +9,7 @@ import About from "../../about";
 import ItemPage from "../../pages/item-page";
 
 import ItemList from "../../item-list/";
+import Footer from "../../footer";
 import coffeService from "../../services";
 import Error from "../../error";
 
@@ -76,6 +77,7 @@ export default class MainPage extends Component {
             </Row>
           </Container>
         </section>
+        <Footer />
       </>
     );
   }

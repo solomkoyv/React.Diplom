@@ -5,6 +5,7 @@ import "../../../sass/mainpage.sass";
 
 import Header from "../../header";
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
+import Footer from "../../footer";
 
 export default class ItemPage extends Component {
   render() {
@@ -51,6 +52,7 @@ export default class ItemPage extends Component {
             </Row>
           </Container>
         </section>
+        <Footer onClearItemSelected={this.props.onClearItemSelected} />
       </>
     );
   }

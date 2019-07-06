@@ -3,12 +3,13 @@ import { Col, Row, Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "../../header";
-import ItemPage from "../../pages/item-page";
+import Footer from "../../footer";
 
 import Beans_logo_dark from "../../../logo/Beans_logo_dark.svg";
 import CoffeeGirl from "../../../img/coffee_girl.jpg";
 
 import ItemList from "../../item-list/";
+import ItemPage from "../../pages/item-page";
 import coffeService from "../../services";
 import Error from "../../error";
 
@@ -101,6 +102,7 @@ export default class ForYourPleasure extends Component {
             </Row>
           </Container>
         </section>
+        <Footer />
       </>
     );
   }
