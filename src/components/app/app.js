@@ -16,7 +16,7 @@ export default class App extends Component {
           <Route path="/our-coffee" component={OurCoffee} />
           <Route path="/for-your-pleasure" component={ForYourPleasure} />
           <Route path="/item-page" component={ItemPage} />
-          <Footer onClearItemSelected={this.props.onClearItemSelected} />
+          <Footer />
         </div>
       </Router>
     );
