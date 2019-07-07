@@ -55,10 +55,6 @@ export default class OurCoffee extends Component {
   };
 
   render() {
-    // if (this.state.error) {
-    //   return <Error />;
-    // }
-
     if (this.state.selectedItem) {
       return (
         <ItemPage
@@ -79,17 +75,15 @@ export default class OurCoffee extends Component {
       return this.state.itemList;
     })();
 
-    let itemList = (
+    const itemList = this.state.error ? (
+      <Error />
+    ) : (
       <ItemList
         onItemSelected={this.onItemSelected}
         itemList={listforRender}
         error={this.state.error}
       />
     );
-
-    if (this.state.error) {
-      itemList = <Error />;
-    }
 
     return (
       <>

@@ -1,7 +1,7 @@
 import idGenerator from "react-id-generator";
 
 export default class CoffeService {
-  _apiBase = `http://localhost:3000`;
+  _apiBase = `http://locawlhost:3000`;
 
   getResource = async url => {
     const res = await fetch(`${this._apiBase}${url}`);
