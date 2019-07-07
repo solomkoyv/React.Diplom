@@ -51,9 +51,9 @@ export default class OurCoffee extends Component {
   onSearchName = name => this.setState({ searchName: name });
 
   render() {
-    if (this.state.error) {
-      return <Error />;
-    }
+    // if (this.state.error) {
+    //   return <Error />;
+    // }
 
     if (this.state.selectedItem) {
       return (
@@ -74,13 +74,19 @@ export default class OurCoffee extends Component {
       }
       return this.state.itemList;
     })();
-    const itemList = (
+
+    let itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
         itemList={listforRender}
         error={this.state.error}
       />
     );
+
+    if (this.state.error) {
+      itemList = <Error />;
+    }
+
     return (
       <>
         <div className="banner">

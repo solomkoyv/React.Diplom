@@ -34,9 +34,9 @@ export default class ForYourPleasure extends Component {
   onClearItemSelected = () => this.setState({ selectedItem: null });
 
   render() {
-    if (this.state.error) {
-      return <Error />;
-    }
+    // if (this.state.error) {
+    //   return <Error />;
+    // }
 
     if (this.state.selectedItem) {
       return (
@@ -47,13 +47,17 @@ export default class ForYourPleasure extends Component {
       );
     }
 
-    const itemList = (
+    let itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
         itemList={this.state.itemList}
         error={this.state.error}
       />
     );
+
+    if (this.state.error) {
+      itemList = <Error />;
+    }
 
     return (
       <>

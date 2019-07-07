@@ -38,9 +38,9 @@ export default class MainPage extends Component {
   }
 
   render() {
-    if (this.state.error) {
-      return <Error />;
-    }
+    // if (this.state.error) {
+    //   return <Error />;
+    // }
 
     if (this.state.selectedItem) {
       return (
@@ -51,7 +51,7 @@ export default class MainPage extends Component {
       );
     }
 
-    const itemList = (
+    let itemList = (
       <ItemList
         onItemSelected={this.onItemSelected}
         itemList={this.state.itemList}
@@ -59,6 +59,10 @@ export default class MainPage extends Component {
         error={this.state.error}
       />
     );
+
+    if (this.state.error) {
+      itemList = <Error />;
+    }
 
     return (
       <>
