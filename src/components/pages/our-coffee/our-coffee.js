@@ -48,7 +48,11 @@ export default class OurCoffee extends Component {
       .catch(() => this.setState({ error: true }));
   };
 
-  onSearchName = name => this.setState({ searchName: name });
+  onSearchName = name => {
+    if (this.state.itemList) {
+      this.setState({ searchName: name });
+    }
+  };
 
   render() {
     // if (this.state.error) {
